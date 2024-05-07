@@ -2,7 +2,7 @@ const mapImage = new Image();
 mapImage.src = "/snowy-sheet.png";
 
 const santaImage = new Image();
-santaImage.src = "/santa.png";
+santaImage.src = "/dragon.png";
 
 const speakerImage = new Image();
 speakerImage.src = "/speaker.png";
@@ -27,21 +27,21 @@ let isPlaying = true;
 const remoteUsers = {};
 window.remoteUsers = remoteUsers;
 
-const muteButton = document.getElementById("mute");
+// const muteButton = document.getElementById("mute");
 const uid = Math.floor(Math.random() * 1000000);
 
-muteButton.addEventListener("click", () => {
-  if (isPlaying) {
-    localTracks.audioTrack.setEnabled(false);
-    muteButton.innerText = "unmute";
-    socket.emit("mute", true);
-  } else {
-    localTracks.audioTrack.setEnabled(true);
-    muteButton.innerText = "mute";
-    socket.emit("mute", false);
-  }
-  isPlaying = !isPlaying;
-});
+// muteButton.addEventListener("click", () => {
+//   if (isPlaying) {
+//     localTracks.audioTrack.setEnabled(false);
+//     muteButton.innerText = "unmute";
+//     socket.emit("mute", true);
+//   } else {
+//     localTracks.audioTrack.setEnabled(true);
+//     muteButton.innerText = "mute";
+//     socket.emit("mute", false);
+//   }
+//   isPlaying = !isPlaying;
+// });
 
 const options = {
   appid: "eee1672fa7ef4b83bc7810da003a07bb",
@@ -69,13 +69,13 @@ function handleUserUnpublished(user) {
 }
 
 async function join() {
-  socket.emit("voiceId", uid);
+  // socket.emit("voiceId", uid);
 
   client.on("user-published", handleUserPublished);
   client.on("user-unpublished", handleUserUnpublished);
 
-  await client.join(options.appid, options.channel, options.token || null, uid);
-  localTracks.audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+  // await client.join(options.appid, options.channel, options.token || null, uid);
+  // localTracks.audioTrack = await AgoraRTC.createMicrophoneAudioTrack();
 
   await client.publish(Object.values(localTracks));
 }
@@ -236,7 +236,7 @@ function loop() {
   }
 
   for (const snowball of snowballs) {
-    canvas.fillStyle = "#FFFFFF";
+    canvas.fillStyle = "#FF0000";
     canvas.beginPath();
     canvas.arc(
       snowball.x - cameraX,
