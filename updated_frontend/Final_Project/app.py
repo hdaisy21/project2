@@ -66,6 +66,9 @@ def login():
         return jsonify(error="Invalid username or password"), 401
     
 
+@app.route('/register')
+def register():
+    return render_template('createAccount.html')
 
 # Route to handle logout
 @app.route('/logout', methods=['GET'])
